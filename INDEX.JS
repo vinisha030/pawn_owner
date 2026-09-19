@@ -19,6 +19,11 @@
 ============================================ */
 
 let bills = [];
+let cameraStream = null;
+let capturedPhotos = {
+  customer: "",
+  item: ""
+};
 
 
 // ============================================
@@ -52,6 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (billForm) {
     billForm.addEventListener("submit", addBill);
   }
+
+  const sampleBillButton = document.getElementById("sampleBillButton");
+
+  if (sampleBillButton) {
+    sampleBillButton.addEventListener("click", showSampleBillPreview);
+  }
+
+  initializeCameraControls();
 
   const itemTypeSelector = document.getElementById("itemType");
 
@@ -116,6 +129,7 @@ function login() {
     document.getElementById("dashboard").classList.remove("hidden");
     errorElement.textContent = "";
     loadDashboard();
+    startCamera();
   } else {
     errorElement.textContent = "Incorrect mobile number or password.";
   }
@@ -211,6 +225,11 @@ function addBill(event) {
     return;
   }
 
+  if (!capturedPhotos.customer || !capturedPhotos.item) {
+    alert("Please capture both the customer photo and item photo.");
+    return;
+  }
+
   const amount = Number(loanAmount.value);
   const valuation = Number(itemAmount.value);
   const rate = Number(interestRate.value);
@@ -277,6 +296,10 @@ function addBill(event) {
 
     interestRate: rate,
 
+    customerPhoto: capturedPhotos.customer,
+
+    itemPhoto: capturedPhotos.item,
+
     date: new Date().toISOString()
 
   };
@@ -298,6 +321,8 @@ function addBill(event) {
   if (billForm) {
     billForm.reset();
   }
+
+  resetCapturedPhotos();
 
   loadDashboard();
   showPrintPreview(bill);
@@ -716,6 +741,9 @@ function normalizeBill(bill) {
     interestRate: Number(bill.interestRate || 0)
   };
 
+  normalized.customerPhoto = String(bill.customerPhoto || "");
+  normalized.itemPhoto = String(bill.itemPhoto || "");
+
   normalized.monthlyInterest = calculateMonthlyInterest(
     normalized.loanAmount,
     normalized.interestRate
@@ -750,6 +778,9 @@ function showPrintPreview(bill) {
     month: "long",
     year: "numeric"
   }));
+
+  setImage("printCustomerPhoto", bill.customerPhoto);
+  setImage("printItemPhoto", bill.itemPhoto);
 
   preview.classList.remove("hidden");
 
@@ -813,5 +844,229 @@ function getNextBillNumber(prefix) {
   });
 
   return prefix + String(highestNumber + 1).padStart(4, "0");
+
+}
+
+
+// ============================================
+// WEBCAM PHOTO CAPTURE
+// ============================================
+
+function initializeCameraControls() {
+
+  const startButton = document.getElementById("startCameraButton");
+
+  if (startButton) {
+    startButton.addEventListener("click", startCamera);
+  }
+
+  document.querySelectorAll(".capture-btn").forEach(function (button) {
+    button.addEventListener("click", function () {
+      capturePhoto(button.dataset.photoTarget);
+    });
+  });
+
+  document.querySelectorAll(".clear-photo-btn").forEach(function (button) {
+    button.addEventListener("click", function () {
+      clearPhoto(button.dataset.photoTarget);
+    });
+  });
+
+}
+
+
+async function startCamera() {
+
+  const status = document.getElementById("cameraStatus");
+
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    setCameraStatus("This browser does not support live camera access.", true);
+    return;
+  }
+
+  if (cameraStream) {
+    return;
+  }
+
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user" },
+      audio: false
+    });
+
+    ["customerCamera", "itemCamera"].forEach(function (cameraId) {
+      const video = document.getElementById(cameraId);
+      if (video) {
+        video.srcObject = cameraStream;
+        video.classList.add("is-live");
+      }
+    });
+
+    document.querySelectorAll(".capture-btn").forEach(function (button) {
+      button.disabled = false;
+    });
+
+    const startButton = document.getElementById("startCameraButton");
+    if (startButton) {
+      startButton.textContent = "Camera Ready";
+      startButton.disabled = true;
+    }
+
+    setCameraStatus("Live camera connected. Capture the customer and item photos.");
+  } catch (error) {
+    setCameraStatus("Camera access was blocked. Allow camera permission and try again.", true);
+    console.error("Unable to access webcam:", error);
+  }
+
+}
+
+
+function capturePhoto(target) {
+
+  if (!cameraStream) {
+    setCameraStatus("Start the camera before capturing a photo.", true);
+    return;
+  }
+
+  const video = document.getElementById(target + "Camera");
+  const canvas = document.getElementById("photoCanvas");
+
+  if (!video || !canvas || !video.videoWidth) {
+    setCameraStatus("The camera is still warming up. Try again in a moment.", true);
+    return;
+  }
+
+  const maxWidth = 900;
+  const scale = Math.min(1, maxWidth / video.videoWidth);
+  canvas.width = Math.round(video.videoWidth * scale);
+  canvas.height = Math.round(video.videoHeight * scale);
+
+  const context = canvas.getContext("2d");
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  capturedPhotos[target] = canvas.toDataURL("image/jpeg", 0.86);
+
+  const preview = document.getElementById(target + "PhotoPreview");
+  const status = document.getElementById(target + "PhotoStatus");
+
+  if (preview) {
+    preview.src = capturedPhotos[target];
+    preview.classList.remove("hidden");
+  }
+
+  if (status) {
+    status.textContent = "Captured";
+    status.classList.add("captured");
+  }
+
+  setCameraStatus(target === "customer"
+    ? "Customer photo captured. Now capture the item photo."
+    : "Item photo captured. Both photos are ready.");
+
+}
+
+
+function clearPhoto(target) {
+
+  capturedPhotos[target] = "";
+
+  const preview = document.getElementById(target + "PhotoPreview");
+  const status = document.getElementById(target + "PhotoStatus");
+
+  if (preview) {
+    preview.removeAttribute("src");
+    preview.classList.add("hidden");
+  }
+
+  if (status) {
+    status.textContent = "Not captured";
+    status.classList.remove("captured");
+  }
+
+  setCameraStatus("Photo cleared. Capture a new photo when ready.");
+
+}
+
+
+function resetCapturedPhotos() {
+  clearPhoto("customer");
+  clearPhoto("item");
+}
+
+
+function setCameraStatus(message, isError) {
+
+  const status = document.getElementById("cameraStatus");
+
+  if (status) {
+    status.textContent = message;
+    status.classList.toggle("error-status", Boolean(isError));
+  }
+
+}
+
+
+function setImage(elementId, source) {
+
+  const image = document.getElementById(elementId);
+
+  if (!image) {
+    return;
+  }
+
+  const photoBlock = image.parentElement;
+
+  if (source) {
+    image.src = source;
+    image.classList.remove("hidden");
+    if (photoBlock) {
+      photoBlock.classList.remove("hidden");
+    }
+  } else {
+    image.removeAttribute("src");
+    image.classList.add("hidden");
+    if (photoBlock) {
+      photoBlock.classList.add("hidden");
+    }
+  }
+
+}
+
+
+function showSampleBillPreview() {
+
+  const sampleImage = createSampleImage("SAMPLE");
+
+  showPrintPreview({
+    billNumber: "G0001",
+    metalType: "Gold",
+    customerName: "Sample Customer",
+    customerMobile: "9876543210",
+    aadharLast4: "1234",
+    customerAddress: "12 Sample Street, Chennai",
+    itemType: "Gold Chain",
+    remark: "Sample bill preview",
+    itemAmount: 75000,
+    loanAmount: 50000,
+    interestRate: 2,
+    customerPhoto: sampleImage,
+    itemPhoto: createSampleImage("ITEM"),
+    date: new Date().toISOString()
+  });
+
+}
+
+
+function createSampleImage(label) {
+
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+      <rect width="900" height="560" fill="#f5eee6"/>
+      <rect x="28" y="28" width="844" height="504" rx="22" fill="#76513c"/>
+      <circle cx="450" cy="220" r="92" fill="#e6c27a" opacity=".9"/>
+      <path d="M300 470c20-105 90-155 150-155s130 50 150 155" fill="#e6c27a" opacity=".9"/>
+      <text x="450" y="455" fill="#fffdf9" font-family="Arial, sans-serif" font-size="42" font-weight="700" text-anchor="middle">${label} PHOTO</text>
+    </svg>`;
+
+  return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
 
 }

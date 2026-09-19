@@ -347,6 +347,172 @@ main {
   background: #56392a;
 }
 
+.sample-bill-btn {
+  margin: 25px 0 0 8px;
+  padding: 14px 18px;
+  border: 1px solid #76513c;
+  border-radius: 8px;
+  background: white;
+  color: #76513c;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.sample-bill-btn:hover {
+  background: #f5eee6;
+}
+
+/* ========================================
+   WEBCAM PHOTOS
+======================================== */
+
+.photo-capture-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #eadfd6;
+}
+
+.photo-capture-heading,
+.camera-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.photo-capture-heading h3 {
+  font-size: 18px;
+}
+
+.photo-capture-heading p {
+  margin-top: 5px;
+  color: #806b5d;
+  font-size: 13px;
+}
+
+.camera-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.camera-panel {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #eadfd6;
+  border-radius: 10px;
+  background: #faf6f1;
+}
+
+.camera-panel h4 {
+  font-size: 15px;
+}
+
+.photo-status {
+  color: #806b5d;
+  font-size: 12px;
+}
+
+.photo-status.captured {
+  color: #276738;
+  font-weight: bold;
+}
+
+.camera-view {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  margin-top: 13px;
+  border-radius: 8px;
+  background: #2b211c;
+}
+
+.camera-view video,
+.camera-view img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.camera-view video {
+  transform: scaleX(-1);
+  opacity: 0;
+}
+
+.camera-view video.is-live {
+  opacity: 1;
+}
+
+.camera-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d9c8ba;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.camera-view video.is-live ~ .camera-placeholder,
+.camera-view .photo-preview:not(.hidden) ~ .camera-placeholder {
+  display: none;
+}
+
+.photo-preview {
+  position: absolute;
+  inset: 0;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.capture-btn,
+.clear-photo-btn,
+.camera-start-btn {
+  padding: 9px 12px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.capture-btn,
+.camera-start-btn {
+  background: #76513c;
+  color: white;
+}
+
+.capture-btn:hover:not(:disabled),
+.camera-start-btn:hover:not(:disabled) {
+  background: #56392a;
+}
+
+.clear-photo-btn {
+  background: #e2d4c8;
+  color: #4a3022;
+}
+
+.capture-btn:disabled,
+.camera-start-btn:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.camera-status {
+  margin-top: 12px;
+  color: #806b5d;
+  font-size: 12px;
+}
+
+.camera-status.error-status {
+  color: #a83232;
+}
+
 /* ========================================
    TABLE
 ======================================== */
@@ -683,6 +849,33 @@ tr:hover {
   font-size: 14px;
 }
 
+.print-photos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  padding: 6px 0 20px;
+}
+
+.print-photos div {
+  display: grid;
+  gap: 7px;
+}
+
+.print-photos span {
+  color: #806b5d;
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.print-photos img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid #eadfd6;
+  border-radius: 6px;
+}
+
 .print-date {
   padding-top: 18px;
   border-top: 1px solid #eadfd6;
@@ -735,6 +928,10 @@ tr:hover {
   }
 
   .print-customer-details {
+    grid-template-columns: 1fr;
+  }
+
+  .print-photos {
     grid-template-columns: 1fr;
   }
 
@@ -828,6 +1025,26 @@ tr:hover {
 
   .card strong {
     font-size: 26px;
+  }
+
+  .photo-capture-heading,
+  .camera-panel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .camera-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-start-btn {
+    width: 100%;
+  }
+
+  .add-btn,
+  .sample-bill-btn {
+    width: 100%;
+    margin-left: 0;
   }
 }
 

@@ -271,8 +271,57 @@
 
           </div>
 
+          <section class="photo-capture-section" aria-labelledby="photoCaptureHeading">
+            <div class="photo-capture-heading">
+              <div>
+                <h3 id="photoCaptureHeading">Customer &amp; Item Photos</h3>
+                <p>Use the live webcam to capture both photos before saving the bill.</p>
+              </div>
+              <button type="button" id="startCameraButton" class="camera-start-btn">Start Camera</button>
+            </div>
+
+            <div class="camera-grid">
+              <div class="camera-panel">
+                <div class="camera-panel-heading">
+                  <h4>Customer Photo</h4>
+                  <span id="customerPhotoStatus" class="photo-status">Not captured</span>
+                </div>
+                <div class="camera-view">
+                  <video id="customerCamera" autoplay playsinline muted></video>
+                  <img id="customerPhotoPreview" class="photo-preview hidden" alt="Captured customer photo">
+                  <span class="camera-placeholder">Camera preview</span>
+                </div>
+                <div class="camera-actions">
+                  <button type="button" class="capture-btn" data-photo-target="customer">Capture Customer</button>
+                  <button type="button" class="clear-photo-btn" data-photo-target="customer">Clear</button>
+                </div>
+              </div>
+
+              <div class="camera-panel">
+                <div class="camera-panel-heading">
+                  <h4>Item Photo</h4>
+                  <span id="itemPhotoStatus" class="photo-status">Not captured</span>
+                </div>
+                <div class="camera-view">
+                  <video id="itemCamera" autoplay playsinline muted></video>
+                  <img id="itemPhotoPreview" class="photo-preview hidden" alt="Captured item photo">
+                  <span class="camera-placeholder">Camera preview</span>
+                </div>
+                <div class="camera-actions">
+                  <button type="button" class="capture-btn" data-photo-target="item">Capture Item</button>
+                  <button type="button" class="clear-photo-btn" data-photo-target="item">Clear</button>
+                </div>
+              </div>
+            </div>
+            <canvas id="photoCanvas" class="hidden"></canvas>
+            <p id="cameraStatus" class="camera-status" role="status">Camera is not connected.</p>
+          </section>
+
           <button type="submit" class="add-btn">
             + Add Bill
+          </button>
+          <button type="button" id="sampleBillButton" class="sample-bill-btn">
+            Preview Sample Bill
           </button>
 
         </form>
@@ -398,6 +447,17 @@
             <div><span>Item Amount / Valuation</span><strong id="printItemAmount"></strong></div>
             <div><span>Principal / Loan Amount</span><strong id="printLoanAmount"></strong></div>
             <div><span>Interest Rate</span><strong id="printInterestRate"></strong></div>
+          </div>
+
+          <div class="print-photos">
+            <div id="printCustomerPhotoBlock">
+              <span>Customer Photo</span>
+              <img id="printCustomerPhoto" alt="Customer photo">
+            </div>
+            <div id="printItemPhotoBlock">
+              <span>Item Photo</span>
+              <img id="printItemPhoto" alt="Item photo">
+            </div>
           </div>
 
           <p class="print-date">Date: <span id="printDate"></span></p>
