@@ -1,0 +1,899 @@
+/* ========================================
+   VINISHA PAWNBROKING - COMPLETE CSS
+======================================== */
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3eadc;
+  color: #241b16;
+}
+
+/* ========================================
+   LOGIN
+======================================== */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b211c;
+  padding: 20px;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 420px;
+  background: #fffdf9;
+  padding: 42px 40px 38px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.logo {
+  width: 65px;
+  height: 65px;
+  background: #76513c;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #e6c27a;
+}
+
+.login-box h1 {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.login-box .brand-heading {
+  color: #4a3022;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 6vw, 29px);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1.2;
+  margin: 18px auto 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.subtitle {
+  text-align: center;
+  color: #806b5d;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin: 9px 0 30px;
+  text-transform: uppercase;
+}
+
+label {
+  display: block;
+  margin: 15px 0 7px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d2c1b3;
+  border-radius: 8px;
+  background: white;
+  font-size: 15px;
+  outline: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input:focus,
+select:focus {
+  border-color: #76513c;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.login-box button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  background: #76513c;
+  color: white;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+.login-box button:hover {
+  background: #56392a;
+}
+
+.error {
+  color: #a83232;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.trust-note {
+  color: #9a8879;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  margin: 24px 0 0;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+/* ========================================
+   DASHBOARD
+======================================== */
+
+.dashboard {
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+header {
+  background: #2b211c;
+  color: white;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #b99155;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e6c27a;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+}
+
+header p {
+  color: #d9c8ba;
+  margin-top: 5px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#todayDate {
+  color: #eadbce;
+}
+
+.logout-btn {
+  background: #76513c;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 7px;
+}
+
+.logout-btn:hover {
+  background: #56392a;
+}
+
+/* ========================================
+   MAIN
+======================================== */
+
+main {
+  width: 90%;
+  max-width: 1400px;
+  margin: 30px auto;
+}
+
+/* ========================================
+   SUMMARY CARDS
+======================================== */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  border-left: 5px solid #76513c;
+  box-shadow: 0 5px 15px rgba(70, 45, 30, 0.08);
+}
+
+.card-title {
+  display: block;
+  color: #806b5d;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.card strong {
+  font-size: 30px;
+}
+
+.card.highlight {
+  background: #76513c;
+  color: white;
+}
+
+.card.highlight .card-title {
+  color: #eadbce;
+}
+
+/* ========================================
+   SECTION
+======================================== */
+
+.section-box {
+  background: white;
+  margin-top: 25px;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(70, 45, 30, 0.08);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  font-size: 20px;
+}
+
+.section-heading p {
+  color: #806b5d;
+  margin-top: 5px;
+}
+
+/* ========================================
+   MONTHLY SECTION
+======================================== */
+
+.monthly-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.monthly-grid div,
+.history-box div {
+  background: #f5eee6;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.monthly-grid span,
+.history-box span {
+  display: block;
+  font-size: 13px;
+  color: #806b5d;
+  margin-bottom: 8px;
+}
+
+.monthly-grid b,
+.history-box b {
+  font-size: 20px;
+}
+
+/* ========================================
+   FORM
+======================================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.add-btn {
+  margin-top: 25px;
+  padding: 14px 25px;
+  background: #76513c;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.add-btn:hover {
+  background: #56392a;
+}
+
+/* ========================================
+   TABLE
+======================================== */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 420px;
+}
+
+th {
+  background: #2b211c;
+  color: white;
+  padding: 13px;
+  text-align: left;
+  font-size: 13px;
+}
+
+td {
+  padding: 13px;
+  border-bottom: 1px solid #eadfd6;
+  font-size: 13px;
+}
+
+tr:hover {
+  background: #faf6f1;
+}
+
+/* ========================================
+   HISTORY
+======================================== */
+
+.history-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.progress-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0 15px;
+}
+
+.progress-heading h3 {
+  font-size: 17px;
+}
+
+.progress-heading span {
+  color: #806b5d;
+  font-size: 12px;
+}
+
+.year-progress {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+  align-items: end;
+}
+
+.progress-month {
+  min-width: 0;
+  text-align: center;
+}
+
+.progress-track {
+  height: 115px;
+  padding: 4px;
+  display: flex;
+  align-items: end;
+  background: #f5eee6;
+  border-radius: 8px;
+}
+
+.progress-fill {
+  width: 100%;
+  min-height: 8px;
+  background: #76513c;
+  border-radius: 5px;
+  transition: height .3s ease;
+}
+
+.progress-month strong {
+  display: block;
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.progress-month span {
+  color: #806b5d;
+  display: block;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+/* ========================================
+   BADGES
+======================================== */
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge.gold {
+  background: #f5df9a;
+  color: #765313;
+}
+
+.badge.silver {
+  background: #e1e4e8;
+  color: #454b52;
+}
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.edit-btn,
+.delete-btn,
+.view-btn {
+  padding: 7px 12px;
+  border-radius: 6px;
+  color: white;
+  font-size: 12px;
+  margin: 2px;
+}
+
+.edit-btn {
+  background: #76513c;
+}
+
+.delete-btn {
+  background: #a83232;
+}
+
+.view-btn {
+  background: #4b6f52;
+}
+
+.edit-btn:hover {
+  background: #56392a;
+}
+
+.delete-btn:hover {
+  background: #7d2424;
+}
+
+.view-btn:hover {
+  background: #36543b;
+}
+
+/* ========================================
+   SEARCH
+======================================== */
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  flex: 1;
+}
+
+.search-btn {
+  padding: 12px 20px;
+  background: #76513c;
+  color: white;
+  border-radius: 8px;
+}
+
+/* ========================================
+   NOTIFICATIONS
+======================================== */
+
+.success {
+  color: #276738;
+  background: #e6f4e9;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.warning {
+  color: #856404;
+  background: #fff3cd;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+/* ========================================
+   PRINT PREVIEW
+======================================== */
+
+.print-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(43, 33, 28, 0.72);
+}
+
+.print-dialog {
+  width: min(760px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 18px;
+  background: #f5eee6;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.print-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.print-actions button {
+  padding: 10px 16px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.print-close {
+  background: #e2d4c8;
+  color: #4a3022;
+}
+
+.print-action {
+  background: #76513c;
+  color: white;
+}
+
+.print-bill {
+  padding: 34px;
+  background: white;
+  color: #241b16;
+}
+
+.print-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 22px;
+  border-bottom: 2px solid #76513c;
+}
+
+.print-header-left {
+  min-width: 0;
+}
+
+.print-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.print-logo {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #2b211c;
+  color: #e6c27a;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+}
+
+.print-brand h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+}
+
+.print-brand p {
+  margin-top: 4px;
+  color: #806b5d;
+  font-size: 12px;
+}
+
+.print-bill-meta {
+  display: grid;
+  gap: 4px;
+  min-width: 155px;
+  text-align: right;
+}
+
+.print-bill-meta span,
+.print-customer-details span {
+  color: #806b5d;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.print-bill-meta strong {
+  margin-bottom: 7px;
+  font-size: 15px;
+}
+
+.print-customer-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 28px;
+  padding: 26px 0 20px;
+}
+
+.print-customer-details div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.print-customer-details strong {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.print-date {
+  padding-top: 18px;
+  border-top: 1px solid #eadfd6;
+  color: #806b5d;
+  font-size: 12px;
+}
+
+.print-signatures {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 58px;
+}
+
+.signature-box {
+  display: grid;
+  gap: 8px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.signature-line {
+  display: block;
+  height: 1px;
+  border-top: 1px solid #241b16;
+}
+
+@media (max-width: 650px) {
+  .print-modal {
+    padding: 10px;
+  }
+
+  .print-dialog {
+    padding: 10px;
+  }
+
+  .print-bill {
+    padding: 22px 16px;
+  }
+
+  .print-header {
+    gap: 18px;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .print-bill-meta {
+    width: 100%;
+    text-align: left;
+  }
+
+  .print-customer-details {
+    grid-template-columns: 1fr;
+  }
+
+  .print-signatures {
+    gap: 18px;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .monthly-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .history-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 650px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  main {
+    width: 94%;
+    margin: 20px auto;
+  }
+
+  .summary-grid,
+  .monthly-grid,
+  .form-grid,
+  .history-box {
+    grid-template-columns: 1fr;
+  }
+
+  .login-box {
+    padding: 32px 22px 28px;
+  }
+
+  .login-box .brand-heading {
+    font-size: 22px;
+    letter-spacing: 0.025em;
+  }
+
+  .section-box {
+    padding: 18px;
+  }
+
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .search-box {
+    flex-direction: column;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .card strong {
+    font-size: 26px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid #b18a68;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   PRINT
+======================================== */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-modal,
+  .print-modal * {
+    visibility: visible;
+  }
+
+  .print-modal {
+    position: absolute;
+    inset: 0;
+    display: block;
+    padding: 0;
+    background: white;
+  }
+
+  .print-dialog {
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    background: white;
+    box-shadow: none;
+  }
+
+  .print-actions {
+    display: none;
+  }
+
+  .print-bill {
+    padding: 0;
+  }
+
+  .logout-btn,
+  .add-btn,
+  .search-box,
+  button {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+
+  .section-box,
+  .card {
+    box-shadow: none;
+  }
+}

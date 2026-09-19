@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VINISHA PAWNBROKING - Owner Dashboard</title>
+  <link rel="stylesheet" href="INDEX.CSS">
+</head>
+
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div id="loginPage" class="login-page">
+    <div class="login-box">
+      <div class="logo" aria-label="Vinisha Pawnbroking logo">♟</div>
+
+      <h1 class="brand-heading">VINISHA PAWNBROKING</h1>
+      <p class="subtitle">Owner Login</p>
+
+      <label>Registered Mobile Number</label>
+      <input type="tel" id="loginMobile" placeholder="Enter mobile number">
+
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter password">
+
+      <button onclick="login()">Login</button>
+
+      <p id="loginError" class="error"></p>
+      <p class="trust-note">Trusted by people since 2010</p>
+    </div>
+  </div>
+
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="dashboard hidden">
+
+    <header>
+      <div>
+        <div class="brand-lockup">
+          <div class="brand-icon" aria-hidden="true">♟</div>
+          <div>
+            <h1>VINISHA PAWNBROKING</h1>
+            <p>Gold & Silver Pledge Loans · Since 2010 · Owner Dashboard</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <span id="todayDate"></span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </header>
+
+
+    <main>
+
+      <!-- SUMMARY -->
+      <section class="summary-grid">
+
+        <div class="card">
+          <span class="card-title">Current Gold Bills</span>
+          <strong id="goldBills">0</strong>
+        </div>
+
+        <div class="card">
+          <span class="card-title">Current Silver Bills</span>
+          <strong id="silverBills">0</strong>
+        </div>
+
+        <div class="card">
+          <span class="card-title">Total Bills</span>
+          <strong id="totalBills">0</strong>
+        </div>
+
+        <div class="card highlight">
+          <span class="card-title">This Month Interest</span>
+          <strong id="monthInterest">₹0</strong>
+        </div>
+
+      </section>
+
+
+      <!-- MONTH DETAILS -->
+      <section class="section-box">
+
+        <div class="section-heading">
+          <div>
+            <h2>This Month</h2>
+            <p id="currentMonth"></p>
+          </div>
+        </div>
+
+        <div class="monthly-grid">
+
+          <div>
+            <span>Total Bills</span>
+            <b id="monthlyBills">0</b>
+          </div>
+
+          <div>
+            <span>Gold Bills</span>
+            <b id="monthlyGold">0</b>
+          </div>
+
+          <div>
+            <span>Silver Bills</span>
+            <b id="monthlySilver">0</b>
+          </div>
+
+          <div>
+            <span>Total Loan Given</span>
+            <b id="monthlyLoan">₹0</b>
+          </div>
+
+          <div>
+            <span>Interest Earned</span>
+            <b id="monthlyInterest">₹0</b>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ADD BILL -->
+      <section class="section-box">
+
+        <div class="section-heading">
+          <div>
+            <h2>Add New Bill</h2>
+            <p>Add customer loan details</p>
+          </div>
+        </div>
+
+        <form id="billForm">
+
+          <div class="form-grid">
+
+            <div>
+              <label>Bill Number (Automatic)</label>
+              <input
+                type="text"
+                id="billNumber"
+                placeholder="Select Gold or Silver"
+                readonly
+                required
+              >
+            </div>
+
+            <div>
+              <label>Metal Type</label>
+              <select id="metalType" required>
+                <option value="">Select</option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Customer Name</label>
+              <input
+                type="text"
+                id="customerName"
+                placeholder="Customer name"
+                required
+              >
+            </div>
+
+            <div>
+              <label>Registered Mobile Number</label>
+              <input
+                type="tel"
+                id="customerMobile"
+                placeholder="10 digit mobile number"
+                maxlength="10"
+                pattern="[0-9]{10}"
+                required
+              >
+            </div>
+
+            <div>
+              <label for="aadharLast4">Last 4 Digits of Aadhaar</label>
+              <input
+                type="text"
+                id="aadharLast4"
+                placeholder="4 digit Aadhaar suffix"
+                maxlength="4"
+                pattern="[0-9]{4}"
+                inputmode="numeric"
+                required
+              >
+            </div>
+
+            <div>
+              <label for="customerAddress">Address</label>
+              <input
+                type="text"
+                id="customerAddress"
+                placeholder="Customer address"
+                required
+              >
+            </div>
+
+            <div>
+              <label>Item</label>
+              <select id="itemType" required>
+                <option value="">Select item</option>
+                <option value="Chain">Chain</option>
+                <option value="Ring">Ring</option>
+                <option value="Necklace">Necklace</option>
+                <option value="Bangle">Bangle</option>
+                <option value="Anklet">Anklet</option>
+                <option value="Nose Ring">Nose Ring</option>
+                <option value="Earring">Earring</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div id="otherItemField" class="hidden">
+              <label for="otherItem">New Item Name</label>
+              <input
+                type="text"
+                id="otherItem"
+                placeholder="Type item name"
+              >
+            </div>
+
+            <div>
+              <label for="remark">Remark</label>
+              <input
+                type="text"
+                id="remark"
+                placeholder="Optional remark"
+              >
+            </div>
+
+            <div>
+              <label>Principal / Loan Amount</label>
+              <input
+                type="number"
+                id="loanAmount"
+                placeholder="₹ Amount"
+                min="1"
+                required
+              >
+            </div>
+
+            <div>
+              <label>Item Amount / Valuation</label>
+              <input
+                type="number"
+                id="itemAmount"
+                placeholder="₹ Item value"
+                min="1"
+                required
+              >
+            </div>
+
+            <div>
+              <label>Monthly Interest Rate (₹ per ₹100)</label>
+              <input
+                type="number"
+                id="interestRate"
+                placeholder="₹1 to ₹5 per ₹100"
+                min="1"
+                max="5"
+                step="1"
+                required
+              >
+            </div>
+
+          </div>
+
+          <button type="submit" class="add-btn">
+            + Add Bill
+          </button>
+
+        </form>
+
+      </section>
+
+
+      <!-- BILLS TABLE -->
+      <section class="section-box">
+
+        <div class="section-heading">
+          <div>
+            <h2>Current Bills</h2>
+            <p>Select Gold or Silver to display bills</p>
+          </div>
+          <select id="billMetalFilter">
+            <option value="">Select metal</option>
+            <option value="Gold">Gold</option>
+            <option value="Silver">Silver</option>
+            <option value="All">All</option>
+          </select>
+        </div>
+
+        <div id="currentBillsTable" class="table-wrapper hidden">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Bill No.</th>
+                <th>Type</th>
+                <th>Customer</th>
+                <th>Loan</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="currentBillTableBody"></tbody>
+          </table>
+        </div>
+
+      </section>
+
+
+      <!-- MONTHLY HISTORY -->
+      <section class="section-box">
+
+        <div class="section-heading">
+          <div>
+            <h2>Monthly History</h2>
+            <p>Compare your monthly business</p>
+          </div>
+
+          <select id="monthSelector" onchange="showMonthData()">
+          </select>
+        </div>
+
+        <div class="history-box">
+
+          <div>
+            <span>Loan Given</span>
+            <b id="historyLoan">₹0</b>
+          </div>
+
+          <div>
+            <span>Gold Bills</span>
+            <b id="historyGold">0</b>
+          </div>
+
+          <div>
+            <span>Silver Bills</span>
+            <b id="historySilver">0</b>
+          </div>
+
+          <div>
+            <span>Interest</span>
+            <b id="historyInterest">₹0</b>
+          </div>
+
+        </div>
+
+        <div class="progress-heading">
+          <h3>12-Month Business Progress</h3>
+          <span>Bill count by month</span>
+        </div>
+        <div id="yearProgress" class="year-progress" aria-label="Twelve month business progress"></div>
+
+      </section>
+
+    </main>
+
+    <div id="printPreview" class="print-modal hidden" role="dialog" aria-modal="true" aria-labelledby="printPreviewTitle">
+      <div class="print-dialog">
+        <div class="print-actions">
+          <button type="button" class="print-close" onclick="closePrintPreview()">Close</button>
+          <button type="button" class="print-action" onclick="printBill()">Print Bill</button>
+        </div>
+
+        <article class="print-bill">
+          <header class="print-header">
+            <div class="print-header-left">
+              <div class="print-brand">
+                <div class="print-logo" aria-hidden="true">♟</div>
+                <div>
+                  <h2 id="printPreviewTitle">VINISHA PAWNBROKING</h2>
+                  <p>Gold &amp; Silver Pledge Loans</p>
+                </div>
+              </div>
+            </div>
+            <div class="print-bill-meta">
+              <span>Bill Number</span>
+              <strong id="printBillNumber"></strong>
+              <span>Metal Type</span>
+              <strong id="printMetalType"></strong>
+            </div>
+          </header>
+
+          <div class="print-customer-details">
+            <div><span>Customer Name</span><strong id="printCustomerName"></strong></div>
+            <div><span>Mobile Number</span><strong id="printCustomerMobile"></strong></div>
+            <div><span>Last 4 Aadhaar Digits</span><strong id="printAadharLast4"></strong></div>
+            <div><span>Address</span><strong id="printCustomerAddress"></strong></div>
+            <div><span>Item</span><strong id="printItemType"></strong></div>
+            <div><span>Remark</span><strong id="printRemark"></strong></div>
+            <div><span>Item Amount / Valuation</span><strong id="printItemAmount"></strong></div>
+            <div><span>Principal / Loan Amount</span><strong id="printLoanAmount"></strong></div>
+            <div><span>Interest Rate</span><strong id="printInterestRate"></strong></div>
+          </div>
+
+          <p class="print-date">Date: <span id="printDate"></span></p>
+
+          <div class="print-signatures">
+            <div class="signature-box">
+              <span class="signature-line"></span>
+              <strong>Owner Signature</strong>
+            </div>
+            <div class="signature-box">
+              <span class="signature-line"></span>
+              <strong>Customer Signature</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="INDEX.JS"></script>
+
+</body>
+</html>
